@@ -41,8 +41,7 @@ if(isset($_POST['order'])){
       echo '<script>clearCustomLocalStorage();</script>';
 
       $message[] = 'Успешно направена поръчка!';
-      // header('Location: paypal.php');
-      // exit();
+   
    }else{
       $message[] = 'Количката ви е празна!';
    }
@@ -54,10 +53,10 @@ if(isset($_POST['order'])){
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <!-- <meta charset="UTF-8">
+   <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>checkout</title> -->
+   <title>checkout</title>
    
    <!-- font awesome cdn link  -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
@@ -99,10 +98,10 @@ if(isset($_POST['order'])){
             echo '<p class="empty">Твоята количка е празна!</p>';
          }
          if(isset($_POST['apply_promo_code']) && $_POST['promo_code'] === 'code') {
-            $grand_total = $grand_total * 0.95; // Намаляване на цената с 5% при приложен промоционален код
+            $grand_total = $grand_total * 0.95; // 5% price reduction when promo code is applied.
             
         } else {
-            $grand_total = $grand_total; // Ако няма приложен промоционален код, субтоталът остава непроменен
+            $grand_total = $grand_total; // If no promo code is applied, the subtotal remains unchanged.
         }
         
       ?>
@@ -183,7 +182,7 @@ document.addEventListener("DOMContentLoaded", function() {
         orderForm.addEventListener('submit', function(event) {
             var paymentMethod = document.querySelector('select[name="method"]').value;
             if (paymentMethod === 'paypal') {
-                // Променяме action атрибута на формата за PayPal
+               // Change the action attribute of the PayPal form.
                 document.getElementById('orderForm').action = 'paypal.php';
             }
         });
@@ -221,7 +220,7 @@ document.addEventListener("DOMContentLoaded", function() {
       }
   });
 
-  // Запазване на данните в localStorage при въвеждане
+  // Save the data to localStorage on input.
   document.addEventListener("input", function() {
       var checkoutData = {
           name: document.querySelector('input[name="name"]').value,
@@ -238,7 +237,7 @@ document.addEventListener("DOMContentLoaded", function() {
       localStorage.setItem('checkoutData', JSON.stringify(checkoutData));
   });
 
-  // Запазване на стойността на промо код в localStorage при приложване
+  // Save promo code value to localStorage on apply.
   document.querySelector('button[name="apply_promo_code"]').addEventListener("click", function() {
       var promoCode = document.querySelector('input[name="promo_code"]').value;
       localStorage.setItem('promoCode', promoCode);
