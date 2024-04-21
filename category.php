@@ -61,7 +61,7 @@ else {
 }
 
 
-   // Execute the SQL query to filter by gender.
+   // Execute the SQL query to filter by gender
     $select_products->execute();
 
     // Check for successful execution of the request.
