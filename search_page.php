@@ -71,8 +71,8 @@ include 'components/wishlist_cart_comment.php';
     <?php
     $available_sizes = explode(',', $fetch_product['size']);
     foreach ($available_sizes as $size) {
-      $selected = ($size === $selected_size) ? 'selected' : ''; // Проверка дали текущия размер е избран
-      echo "<option value=\"$size\" $selected>$size</option>"; // Добавяне на размерите към падащото меню
+      $selected = ($size === $selected_size) ? 'selected' : ''; // Check if the current size is selected.
+      echo "<option value=\"$size\" $selected>$size</option>"; // Add the dimensions to the dropdown.
     }
      
     ?>
