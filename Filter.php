@@ -49,13 +49,13 @@ if (isset($_GET['brand']) && isset($_GET['collection'])){
    <div class="box-container">
    <?php
 if(isset($_POST['filter_price'])) {
-    // Код за обработка на формата за филтриране по цена
-    $filter_price = $_POST['filter_price']; // Добавете този ред за инициализиране на стойността на $filter_price
+    // Code to handle the form to filter by price.
+    $filter_price = $_POST['filter_price']; // Add this line to initialize the value of $filter_price.
     $select_filtered_products = $conn->prepare("SELECT * FROM `filtered_products_dropdown_menu`  WHERE `price` <= :filter_price");
     $select_filtered_products->bindParam(':filter_price', $filter_price, PDO::PARAM_INT);
     $select_filtered_products->execute();
 
-    // Проверка за наличие на резултати
+    // Check for results.
     if ($select_filtered_products->rowCount() > 0) {
         while ($fetch_filtered_product = $select_filtered_products->fetch(PDO::FETCH_ASSOC)) {
             ?>
@@ -78,8 +78,8 @@ if(isset($_POST['filter_price'])) {
     <?php
     $available_sizes = explode(',', $fetch_filtered_product['size']);
     foreach ($available_sizes as $size) {
-      $selected = ($size === $selected_size) ? 'selected' : ''; // Проверка дали текущия размер е избран
-      echo "<option value=\"$size\" $selected>$size</option>"; // Добавяне на размерите към падащото меню
+      $selected = ($size === $selected_size) ? 'selected' : ''; // Check if the current size is selected.
+      echo "<option value=\"$size\" $selected>$size</option>"; // Add the dimensions to the dropdown.
     }
      
     ?>
@@ -91,15 +91,14 @@ if(isset($_POST['filter_price'])) {
         echo '<p class="empty">Няма намерени налични продукти след филтрирането!</p>';
     }
 } else {
-    // Код за извличане на резултатите от таблицата products (ако не е натиснат бутона "Филтрирай")
-
+// Code to retrieve the results from the products table (if the "Filter" button is not pressed).
     $brand = $_GET['brand'];
     $collection = $_GET['collection'];
 
     $brandPattern = "%$brand%";
     $collectionPattern = "%$collection%";
 
-    // Изтриване на старите записи
+// Delete the old records.
     $delete_old_records = $conn->prepare("DELETE FROM `filtered_products_dropdown_menu`");
     $delete_old_records->execute();
 
@@ -109,7 +108,7 @@ if(isset($_POST['filter_price'])) {
     $select_products->execute();
 
     while ($fetch_product = $select_products->fetch(PDO::FETCH_ASSOC)) {
-        // Извършете вмъкването в новата таблица (filtered_products)
+        // Perform the insert into the new table (filtered_products).
         $insert_filter = $conn->prepare("INSERT INTO `filtered_products_dropdown_menu` (product_id, name, price, image_01, image_02, size) 
                                         VALUES (:product_id, :name, :price, :image_01, :image_02, :size)");
         $insert_filter->bindParam(':product_id', $fetch_product['id'], PDO::PARAM_INT);
@@ -140,8 +139,8 @@ if(isset($_POST['filter_price'])) {
     <?php
     $available_sizes = explode(',', $fetch_product['size']);
     foreach ($available_sizes as $size) {
-      $selected = ($size === $selected_size) ? 'selected' : ''; // Проверка дали текущия размер е избран
-      echo "<option value=\"$size\" $selected>$size</option>"; // Добавяне на размерите към падащото меню
+      $selected = ($size === $selected_size) ? 'selected' : ''; // Check if the current size is selected.
+      echo "<option value=\"$size\" $selected>$size</option>"; // Add the dimensions to the dropdown.
     }
      
     ?>
@@ -171,9 +170,9 @@ if ($select_products->rowCount() == 0) {
    
    var slider = document.getElementById("filter_price");
    var output = document.getElementById("selected_value");
-   output.innerHTML = slider.value; // Display the default slider value
+   output.innerHTML = slider.value; // Display the default slider value.
  
-   // Update the current slider value (each time you drag the slider handle)
+   // Update the current slider value (each time you drag the slider handle).
    slider.oninput = function() {
      output.innerHTML = this.value;
    }
