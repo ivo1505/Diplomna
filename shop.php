@@ -101,8 +101,8 @@ include 'components/wishlist_cart_comment.php';
     <?php
     $available_sizes = explode(',', $fetch_product['size']);
     foreach ($available_sizes as $size) {
-      $selected = ($size === $selected_size) ? 'selected' : ''; // Проверка дали текущия размер е избран
-      echo "<option value=\"$size\" $selected>$size</option>"; // Добавяне на размерите към падащото меню
+      $selected = ($size === $selected_size) ? 'selected' : ''; // Check if the current size is selected.
+      echo "<option value=\"$size\" $selected>$size</option>"; // Add the dimensions to the dropdown.
     }
      
     ?>
@@ -117,8 +117,8 @@ include 'components/wishlist_cart_comment.php';
     </div>
 </section>
 
-   <!-- Форма за филтър -->
-   <div class="price-filter-form-container">
+<!-- Filter Form -->  
+ <div class="price-filter-form-container">
    <form method="post" action="">
       <label for="filter_price">Филтриране по цена:</label>
       <input type="range" min="1" max="1000" value="500" class="slider" name="filter_price" id="filter_price" step="1">
@@ -159,9 +159,9 @@ include 'components/wishlist_cart_comment.php';
    
   var slider = document.getElementById("filter_price");
   var output = document.getElementById("selected_value");
-  output.innerHTML = slider.value; // Display the default slider value
+  output.innerHTML = slider.value; // Display the default slider value.
 
-  // Update the current slider value (each time you drag the slider handle)
+  // Update the current slider value (each time you drag the slider handle).
   slider.oninput = function() {
     output.innerHTML = this.value;
   }
@@ -259,7 +259,7 @@ input[name="price-filter-submit-button"]:hover {
 }
 input[name="gender-filter-submit-button"] {
     display: block;
-    width: 100%; /* Заема цялата ширина на наличния контейнер */
+    width: 100%; /* Occupies the entire width of the available container */
     background-color: #3498db;
     color: #fff;
     padding: 12px 20px;
@@ -275,7 +275,7 @@ input[name="gender-filter-submit-button"]:hover {
 }
 input[name="brand-filter-submit-button"] {
     display: block;
-    width: 100%; /* Заема цялата ширина на наличния контейнер */
+    width: 100%; /* Occupies the entire width of the available container */
     background-color: #3498db;
     color: #fff;
     padding: 12px 20px;
