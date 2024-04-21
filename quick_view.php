@@ -13,17 +13,16 @@ if(isset($_SESSION['user_id'])){
 include 'components/wishlist_cart_comment.php';
 
 if(isset($_POST['submit'])) {
-   // Проверка дали формата за редактиране на коментара е изпратена
-   
+   // Check if the comment edit form has been submitted.   
    $comment_id = $_POST['comment_id'];
    $edited_comment = $_POST['edited_comment'];
    $edited_comment = filter_var($edited_comment, FILTER_SANITIZE_STRING);
    
-   // Актуализация на коментара в базата данни
+   // Update the comment in the database.
    $update_comment = $conn->prepare("UPDATE comments SET comment = ? WHERE id = ?");
    $update_comment->execute([$edited_comment, $comment_id]);
    
-   // Проверка за успешно редактиране на коментара и изпращане на съобщение
+   // Check for successful comment editing and message sending.
    if ($update_comment) {
        $message[] = 'Коментарът е успешно редактиран.';
    } else {
@@ -103,8 +102,8 @@ if(isset($_POST['submit'])) {
     <?php
     $available_sizes = explode(',', $fetch_product['size']);
     foreach ($available_sizes as $size) {
-      $selected = ($size === $selected_size) ? 'selected' : ''; // Проверка дали текущия размер е избран
-      echo "<option value=\"$size\" $selected>$size</option>"; // Добавяне на размерите към падащото меню
+      $selected = ($size === $selected_size) ? 'selected' : ''; // Check if the current size is selected.
+      echo "<option value=\"$size\" $selected>$size</option>"; // Add the dimensions to the dropdown.
     }
      
     ?>
@@ -167,8 +166,8 @@ if ($select_comments->execute([$pid])) {
          echo '</div>';
             
         }
-        
-        // Затваряме курсора след като излезем от цикъла
+
+        // Close the cursor after exiting the loop.
         $select_comments->closeCursor();
     } else {
         echo '<p class="empty">Няма коментари за този продукт.</p>';
@@ -184,8 +183,8 @@ if ($select_comments->execute([$pid])) {
 
 <script src="js/script.js"></script>
 <style>
-    /* Стилове за textarea */
-    textarea {
+     /* Styles for textarea */    
+      textarea {
       width: 100%;
       padding: 10px;
       font-size: 16px;
@@ -194,12 +193,12 @@ if ($select_comments->execute([$pid])) {
       margin-bottom: 10px;
     }
 
-    /* Стилове за скритото поле input */
+     /* Styles for the hidden input field */
     input[type="hidden"] {
-      /* Вашият код може да изглежда по-различно в зависимост от изискванията ви */
+      /* Your code may look different depending on your requirements */
       display: none;
     }    select {
-        font-size: 16px; /* Можете да промените 16px на желания от вас размер */
+        font-size: 16px;/* You can change 16px to whatever size you want */
     }
     h3{
        margin-left: 360px;
