@@ -9,41 +9,41 @@ if(isset($_SESSION['user_id'])){
 } else {
     $user_id = '';
     header('location:user_login.php');
-    exit(); // Не забравяйте да добавите exit() след пренасочването, за да спрете изпълнението на кода долу
+    exit(); // Don't forget to add exit() after the redirect to stop the code below from executing.
 }
 
-// Проверка за съществуване на POST заявката
+// Check for the existence of the POST request.
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Проверка за съществуване на общата сума
+   // Check for existence of the total.
     if(isset($_POST['total_amount']) && is_numeric($_POST['total_amount'])) {
-        $total_amount = $_POST['total_amount']; // Променено от $POST на $_POST
+        $total_amount = $_POST['total_amount']; // Changed from $POST to $_POST.
 
-        // Редирект към страницата на PayPal с необходимите параметри
-        $paypal_url = 'https://www.paypal.com/cgi-bin/webscr'; // URL на страницата на PayPal за плащане
-        $business_email = 'вашпейпъл_имейл@example.com'; // Тук посочете вашия PayPal имейл
+        // Redirect to PayPal page with required parameters.
+        $paypal_url = 'https://www.paypal.com/cgi-bin/webscr'; // PayPal payment page URL.
+        $business_email = 'ivakabg05@gmail.com'; // Enter your PayPal email here.
 
-        // Генериране на данни за плащане към PayPal
+        // Generate payment data to PayPal.
         $data = array(
             'cmd' => '_xclick',
             'business' => $business_email,
             'amount' => $total_amount,
-            'currency_code' => 'USD', // Валутен код
-            // Добавете още параметри по необходимост
+            'currency_code' => 'BGN', // Currency code.
+            // Add more parameters as needed.
         );
 
-        // Подготовка на данните за пренасочване
+        // Prepare data for forwarding.
         $query_string = http_build_query($data);
         $paypal_redirect_url = $paypal_url . '?' . $query_string;
 
-        // Пренасочване към страницата на PayPal
+        // Redirect to PayPal page.
         header("Location: $paypal_redirect_url");
         exit();
     } else {
-        // Ако общата сума липсва или не е числено значение, изведете грешка
+      // If the total is missing or not a numeric value, throw an error.
         echo "Грешка: Невалидна обща сума за плащане.";
     }
 } else {
-    // Ако заявката не е POST, изведете грешка
+    // If the request is not a POST, throw an error.
     echo "Грешка: Невалидна заявка.";
 }
 
