@@ -49,7 +49,7 @@ if (isset($_GET['brand'])) {
 if (isset($_POST['filter_gender'])) {
     $filter_gender = $_POST['filter_gender'];
     
-  // Подготовка на SQL заявка за филтриране на уникални продукти по пол
+  // Prepare SQL query to filter unique products by gender.
   if ($filter_gender == 'male') {
     $select_products = $conn->prepare("SELECT DISTINCT `id`, `name`, `price`, `image_01`, `image_02`, `size` FROM `filtered_products_category` WHERE `gender` = 'мъже'");
 } elseif ($filter_gender == 'female') {
@@ -61,15 +61,15 @@ else {
 }
 
 
-    // Изпълнение на SQL заявката за филтриране по пол
+   // Execute the SQL query to filter by gender.
     $select_products->execute();
 
-    // Проверка за успешно изпълнение на заявката
+    // Check for successful execution of the request.
     if ($select_products->rowCount() > 0) {
-        // Извеждане на продуктите
+        // Output the products.
         while ($fetch_filtered_product = $select_products->fetch(PDO::FETCH_ASSOC)) {
             ?>
-            <!-- Форма за всякакви действия с продукта -->
+            <!-- Form for any actions with the product. -->
             <form action="" method="post" class="box">
                 <input type="hidden" name="pid" value="<?= $fetch_filtered_product['id']; ?>">
                 <input type="hidden" name="name" value="<?= $fetch_filtered_product['name']; ?>">
@@ -89,8 +89,8 @@ else {
     <?php
     $available_sizes = explode(',', $fetch_filtered_product['size']);
     foreach ($available_sizes as $size) {
-      $selected = ($size === $selected_size) ? 'selected' : ''; // Проверка дали текущия размер е избран
-      echo "<option value=\"$size\" $selected>$size</option>"; // Добавяне на размерите към падащото меню
+      $selected = ($size === $selected_size) ? 'selected' : ''; // Check if the current size is selected.
+      echo "<option value=\"$size\" $selected>$size</option>"; // Add the dimensions to the dropdown.
     }
      
     ?>
@@ -99,7 +99,7 @@ else {
             <?php
         }
     } else {
-        // Ако няма намерени продукти след филтрирането
+        // If no products found after filtering.
         echo '<p class="empty">Няма намерени налични продукти след филтрирането!</p>';
     }
 }
@@ -132,8 +132,8 @@ if(isset($_POST['filter_price'])) {
     <?php
     $available_sizes = explode(',', $fetch_product['size']);
     foreach ($available_sizes as $size) {
-      $selected = ($size === $selected_size) ? 'selected' : ''; // Проверка дали текущия размер е избран
-      echo "<option value=\"$size\" $selected>$size</option>"; // Добавяне на размерите към падащото меню
+      $selected = ($size === $selected_size) ? 'selected' : ''; // Check if the current size is selected.
+      echo "<option value=\"$size\" $selected>$size</option>"; // Add the dimensions to the dropdown.
     }
      
     ?>
@@ -147,7 +147,7 @@ if(isset($_POST['filter_price'])) {
 } else {
     $brand = $_GET['brand'];
 
-    // Изтриване на старите записи
+   // Delete the old records.
     $delete_old_records = $conn->prepare("DELETE FROM `filtered_products_category`");
     $delete_old_records->execute();
 
@@ -156,7 +156,7 @@ if(isset($_POST['filter_price'])) {
     $select_products->execute();
 
     while ($fetch_product = $select_products->fetch(PDO::FETCH_ASSOC)) {
-        // Извършете вмъкването в новата таблица (products1912)
+        // Perform the insert into the new table.
         $insert_filter = $conn->prepare("INSERT INTO `filtered_products_category` (product_id, name, price, image_01, image_02, size, gender) 
                                         VALUES (:product_id, :name, :price, :image_01, :image_02, :size, :gender)");
         $insert_filter->bindParam(':product_id', $fetch_product['id'], PDO::PARAM_INT);
@@ -188,8 +188,8 @@ if(isset($_POST['filter_price'])) {
     <?php
     $available_sizes = explode(',', $fetch_product['size']);
     foreach ($available_sizes as $size) {
-      $selected = ($size === $selected_size) ? 'selected' : ''; // Проверка дали текущия размер е избран
-      echo "<option value=\"$size\" $selected>$size</option>"; // Добавяне на размерите към падащото меню
+      $selected = ($size === $selected_size) ? 'selected' : ''; // Check if the current size is selected.
+      echo "<option value=\"$size\" $selected>$size</option>"; // Add the dimensions to the dropdown.
     }
      
     ?>
@@ -335,7 +335,7 @@ input[name="price-filter-submit-button"]:hover {
 }
 input[name="gender-filter-submit-button"] {
     display: block;
-    width: 100%; /* Заема цялата ширина на наличния контейнер */
+    width: 100%; 
     background-color: #3498db;
     color: #fff;
     padding: 12px 20px;
