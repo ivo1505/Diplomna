@@ -22,8 +22,6 @@ include 'components/wishlist_cart_comment.php';
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta name="author" content="Ивелин Беловеждов">
    <meta name="robots" content="index, follow">
-   <!-- <meta name="keywords" content="ключова_дума1, ключова_дума2, ключова_дума3">
-   <meta name="description" content="Кратко и съдържателно описание на уеб страницата."> -->
 
    <title>index</title>
 
@@ -43,7 +41,7 @@ include 'components/wishlist_cart_comment.php';
 <div class="home-bg">
 
 <section class="home">
-<!-- Auto slider !spira da bachka ako potrebitelq cukne strelkite -->
+<!-- Auto slider -->
 
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 
@@ -168,8 +166,8 @@ include 'components/wishlist_cart_comment.php';
     <?php
     $available_sizes = explode(',', $fetch_product['size']);
     foreach ($available_sizes as $size) {
-      $selected = ($size === $selected_size) ? 'selected' : ''; // Проверка дали текущия размер е избран
-      echo "<option value=\"$size\" $selected>$size</option>"; // Добавяне на размерите към падащото меню
+      $selected = ($size === $selected_size) ? 'selected' : ''; // Check if the current size is selected.
+      echo "<option value=\"$size\" $selected>$size</option>"; // Add the dimensions to the dropdown.
     }
      
     ?>
@@ -253,7 +251,7 @@ var swiper = new Swiper(".products-slider", {
 });
 
 var swiper = new Swiper('.swiper-container', {
-    // Добавете параметрите на вашите настройки на Swiper тук, ако е необходимо
+    // Add your Swiper settings parameters here if needed.
     navigation: {
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev',
@@ -262,9 +260,9 @@ var swiper = new Swiper('.swiper-container', {
 </script>
 
 <style>label {
-   font-size: 16px; /* Можете да промените 16px на желания от вас размер */
+   font-size: 16px; 
 }  select {
-        font-size: 16px; /* Можете да промените 16px на желания от вас размер */
+        font-size: 16px; 
     }
    </style>
 </body>
