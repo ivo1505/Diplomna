@@ -91,12 +91,12 @@ if(isset($_POST['update'])){
 }
 
 if (isset($_POST['delete_comment'])) {
-   // Изтриване на коментара от базата данни
+   // Delete the comment from the database
    $comment_id = $_POST['comment_id'];
    $delete_comment = $conn->prepare("DELETE FROM `comments` WHERE id = ?");
    $delete_comment->execute([$comment_id]);
 
-   // Пренасочване към предишната страница след изтриването
+   // Redirect to previous page after delete
    header("Location: {$_SERVER['HTTP_REFERER']}");
    exit;
 }
@@ -177,16 +177,16 @@ if (isset($_POST['delete_comment'])) {
 <section class="comments-section">
    <h2 class="heading">Коментари към продукта</h2>
    <?php
-      // Извличане на коментарите от базата данни
+   // Retrieve the comments from the database
       $product_id = $_GET['update'];
       $select_comments = $conn->prepare("SELECT * FROM `comments` WHERE product_id = ?");
       $select_comments->execute([$product_id]);
 
-      // Проверка дали има коментари
+     // Check for comments
       if ($select_comments->rowCount() > 0) {
-         // Извличане на коментарите и тяхното визуализиране
+         // Fetch the comments and render them
          while ($comment = $select_comments->fetch(PDO::FETCH_ASSOC)) {
-            // Извличане на името на потребителя
+            // Retrieve the username
             $user_id = $comment['user_id'];
             $select_user = $conn->prepare("SELECT name FROM `users` WHERE id = ?");
             $select_user->execute([$user_id]);
@@ -196,7 +196,7 @@ if (isset($_POST['delete_comment'])) {
                <p><strong>Потребител:</strong> <?= $username; ?> | 
                <strong>Коментар:</strong> <?= $comment['comment']; ?> | 
                <strong>Дата на създаване:</strong> <?= $comment['created_at']; ?>
-               <!-- Форма за изтриване на коментара -->
+               <!-- Comment delete form -->
                <form style="display:inline;" action="" method="post">
     <input type="hidden" name="comment_id" value="<?= $comment['id']; ?>">
     <button type="submit" class="btn"  onclick="return confirm('Изтриване на коментара?');"name="delete_comment">Изтрий коментара</button>

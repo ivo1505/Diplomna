@@ -66,8 +66,7 @@ if(isset($_POST['submit'])){
    </form>
 
 </section>
-<!-- <script src="..js/admin_script.js"></script>
-tva ne bachka trqbva da go opraish -->
+
 </body>
 </html>
 <script>
