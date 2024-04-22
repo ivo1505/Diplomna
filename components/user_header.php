@@ -112,7 +112,6 @@
      echo '<a href="user_login.php" class="option-btn">Вписване</a>';
      echo '</div>';
  } else {
-     // друг код, който искате да изпълните, когато потребителят е влязъл
  }
 ?>
       <a href="components/user_logout.php" class="delete-btn" onclick="return confirm('Сигурно ли сте, че искате да излезнете от профила си?');">Отписване</a> 

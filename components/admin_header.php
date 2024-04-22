@@ -31,7 +31,6 @@
    <a href="../admin/dashboard.php" class="logo">FootX <span>Admin</span></a>
 
    <nav class="navbar">
-      <!-- <button><a href="../admin/dashboard.php">Home</a></button> -->
       <button><a href="../admin/products.php">Добави продукт</a></button>
       <button><a href="../admin/productsfunc.php">Налични продуктите</a></button>
       <button><a href="../admin/placed_orders.php">Поръчки</a></button>
@@ -54,10 +53,7 @@
       ?>
       <b><p>Администраторско име:</b> <?= $fetch_profile['name']; ?></p>
       <a href="../admin/update_profile.php" class="btn">Обнови акаунт</a>
-      <!-- <div class="flex-btn">
-         <a href="../admin/register_admin.php" class="option-btn">register</a>
-         <a href="../admin/admin_login.php" class="option-btn">login</a>
-      </div> -->
+      
       <a href="../components/admin_logout.php" class="delete-btn" onclick="return confirm('Сигурни ли сте, че искате да излезнете от профила си?');">Излизане</a> 
    </div>
 

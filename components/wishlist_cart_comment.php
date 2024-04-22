@@ -44,25 +44,25 @@ if (isset($_POST['add_comment'])) {
            $pid = $_POST['pid'];
            $comment = $_POST['comment'];
 
-           // Извършване на санитизация на данните, ако е необходимо
+           // Perform data sanitization if needed
            $pid = filter_var($pid, FILTER_SANITIZE_STRING);
            $comment = filter_var($comment, FILTER_SANITIZE_STRING);
 
-           // Проверка за празен коментар
+           // Check for an empty comment
            if (empty($comment)) {
                $message[] = 'Моля въведете валиден коментар!';
            } else {
-               // Подготовка на SQL заявката
+            // Prepare the SQL query
                $insert_comment_query = $conn->prepare("INSERT INTO comments (product_id, user_id, comment) VALUES (?, ?, ?)");
 
-               // Изпълнение на заявката с подадените параметри
+               // Execute the request with the passed parameters
                $insert_comment_query->execute([$pid, $user_id, $comment]);
 
-               // Можете да добавите логика за проверка на успешността на заявката и да върнете съобщение
+              // You can add logic to check the success of the request and return a message
                $message[] = 'Коментарът беше успешно добавен!';
            }
        } else {
-           // Ако не са предоставени необходимите данни, върнете съобщение за грешка
+         // If the required data is not provided, return an error message
            $message[] = 'Не са предоставени всички необходими данни за добавяне на коментар!';
        }
    }
