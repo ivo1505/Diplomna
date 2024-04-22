@@ -42,16 +42,16 @@ document.addEventListener("DOMContentLoaded", function () {
        nextEl: ".swiper-button-next",
        prevEl: ".swiper-button-prev",
      },
-     // Добавете тази опция, за да позволите автоматичното превключване
-     // да продължи след клик на стрелките
+     // Add this option to enable automatic switching
+      // continue after arrows are clicked
      allowTouchMove: false,
      disableOnInteraction: false,
    });
  });
 
-     // Проверка дали има запазени данни в localStorage и възстановяване на тях
+     // Check if there is data saved in localStorage and restore it
 
-   // Функция за изтриване на информацията от localStorage
+  // Function to delete the information from localStorage
    function clearCustomLocalStorage() {
       localStorage.removeItem('checkoutData');
       localStorage.removeItem('promoCode');
@@ -59,9 +59,9 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById('orderForm').addEventListener('submit', function(event) {
       var paymentMethod = document.getElementById('orderMethod').value;
       if (paymentMethod === 'наложен платеж') {
-         // Не правим нищо, формата ще се изпрати към същата страница
+        // We do nothing, the form will submit to the same page
       } else if (paymentMethod === 'paypal') {
-         // Променяме action атрибута на формата
+         // Change the form's action attribute
          document.getElementById('orderForm').action = 'paypal.php';
       }
    });
