@@ -19,6 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $placed_on = date('Y-m-d H:i:s'); // Get the current date and time.
         $total_products = $_POST['total_products'];
         $total_price = $_POST['total_price'];
+        
 
         // Save the order information to the database.
         $stmt = $conn->prepare("INSERT INTO orders (user_id, name, number, email, method, address, UpdationDate, total_products, total_price) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");

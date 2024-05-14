@@ -121,13 +121,11 @@ if(isset($_POST['order'])){
             <span><b>Имейл:</b></span>
             <input type="email" name="email" placeholder="Въведи имейл" class="box" maxlength="50" required>
          </div>
-         <div class="inputBox">
-            <span><b>Метод на плащане:</b></span>
-            <select name="method" name="method" class="box" required>
-               <option value="cash on delivery">наложен платеж</option>
-               <option value="paypal">paypal</option>
-            </select>
-         </div>
+            <div class = "inputBox">
+            <span><b>Промо код:</b></span>
+         <br><input type="text" class = "box" name="promo_code" placeholder="Въведете промо код 'code' за 5% отстъпка">
+         <button   class = "btn" name="apply_promo_code">Приложи</button>
+      </div>
          <div class="inputBox">
             <span><b>Адрес за доставка 01:</b></span>
             <input type="text" name="flat" placeholder="Въведи адрес за доставка 01" class="box" maxlength="50" required>
@@ -152,13 +150,14 @@ if(isset($_POST['order'])){
             <span><b>Пощенски код:</b></span>
             <input type="number" min="0" name="pin_code" placeholder="Въведи пощенски код" min="0" max="999999" onkeypress="if(this.value.length == 6) return false;" class="box" required>
          </div>
-      </div>
-      <div class = "flex">
-            <div class = "inputBox">
-            <span><b>Промо код:</b></span>
-         <br><input type="text" class = "box" name="promo_code" placeholder="Въведете промо код 'code' за 5% отстъпка">
-         <button   class = "btn" name="apply_promo_code">Приложи</button>
-      </div>
+         <div class="inputBox">
+            <span><b>Метод на плащане:</b></span>
+            <select name="method" name="method" class="box" required>
+               <option value="cash on delivery">наложен платеж</option>
+               <option value="paypal">paypal</option>
+            </select>
+         </div>
+      
       </div>
          <input type="hidden" name="total_products" value="<?= $total_products; ?>">
          <input type="hidden" name="total_price" value="<?= $grand_total; ?>" value="">

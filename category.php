@@ -54,11 +54,10 @@ if (isset($_POST['filter_gender'])) {
     $select_products = $conn->prepare("SELECT DISTINCT `id`, `name`, `price`, `image_01`, `image_02`, `size` FROM `filtered_products_category` WHERE `gender` = 'мъже'");
 } elseif ($filter_gender == 'female') {
     $select_products = $conn->prepare("SELECT DISTINCT `id`, `name`, `price`, `image_01`, `image_02`, `size` FROM `filtered_products_category` WHERE `gender` = 'жени'");
+} else {
+    echo '<p class="empty">Няма намерени налични продукти след филтрирането!</p>';
 }
-else {
-   
-    exit(); 
-}
+
 
 
    // Execute the SQL query to filter by gender
@@ -130,7 +129,7 @@ if(isset($_POST['filter_price'])) {
                 <label for="text"><b>Налични размери:</b></label>
       <select id="size" name="size">
     <?php
-    $available_sizes = explode(',', $fetch_product['size']);
+    $available_sizes = explode(',', $fetch_filtered_product['size']);
     foreach ($available_sizes as $size) {
       $selected = ($size === $selected_size) ? 'selected' : ''; // Check if the current size is selected.
       echo "<option value=\"$size\" $selected>$size</option>"; // Add the dimensions to the dropdown.
@@ -148,12 +147,13 @@ if(isset($_POST['filter_price'])) {
     $brand = $_GET['brand'];
 
    // Delete the old records.
-    $delete_old_records = $conn->prepare("DELETE FROM `filtered_products_category`");
-    $delete_old_records->execute();
-
-    $select_products = $conn->prepare("SELECT * FROM `products` WHERE brand LIKE :brand");
-    $select_products->bindParam(':brand', $brand, PDO::PARAM_STR);
-    $select_products->execute();
+   $delete_old_records = $conn->prepare("DELETE FROM `filtered_products_category`");
+   $delete_old_records->execute();
+   
+   // За добавяне на новите записи
+   $select_products = $conn->prepare("SELECT * FROM `products` WHERE brand LIKE :brand");
+   $select_products->bindParam(':brand', $brand, PDO::PARAM_STR);
+   $select_products->execute();
 
     while ($fetch_product = $select_products->fetch(PDO::FETCH_ASSOC)) {
         // Perform the insert into the new table.
